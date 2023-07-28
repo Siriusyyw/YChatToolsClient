@@ -1,5 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include "chatmanage.h"
+#include "chatmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -8,6 +11,9 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+    ChatManage chatManage;
+    engine.rootContext()->setContextProperty("ChatManage", &chatManage);
+    engine.rootContext()->setContextProperty("ChatModel", &chatManage.chatmodel());
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

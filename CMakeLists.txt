@@ -37,6 +37,11 @@ if(ANDROID)
 else()
     add_executable(YChatTools
       main.cpp
+      chatmanage.cpp chatmanage.h
+      clientsocket.h clientsocket.cpp
+      chatmessage.h chatmessage.cpp
+      chatmodel.h chatmodel.cpp
+      packet.h packet.cpp
       qml.qrc
     )
 endif()
@@ -44,7 +49,7 @@ endif()
 target_compile_definitions(YChatTools
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 target_link_libraries(YChatTools
-  PRIVATE Qt5::Core Qt5::Quick
+  PRIVATE Qt5::Core Qt5::Quick Qt5::Network
   fluentuiplugin
 )
 
